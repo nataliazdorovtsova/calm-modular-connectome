@@ -1,0 +1,47 @@
+# ---------------------------------------------------------------------------
+# PARTICIPANT DATA — NEVER COMMITTED
+# ---------------------------------------------------------------------------
+# data/ holds CALM participant data: per-subject connectomes keyed by CALM ID,
+# and a behavioural datasheet carrying special-category health data (clinical
+# diagnoses, medication status, gender, age in months, IQ percentiles) for 315
+# children. It stays on /imaging, inside CBU's governance framework, and is
+# regenerable by anyone with cluster access:
+#
+#     env/bin/python scripts/export_calm800_schaefer100x17.py
+#
+# Do not add exceptions to this rule without the CALM data manager's sign-off.
+data/
+
+# Any stray participant-level files, wherever they land
+*.mat
+sub-*.csv
+*datasheet*
+*phenotype*
+
+# ---------------------------------------------------------------------------
+# Environment (1.7 GB; rebuild with scripts/setup_env.sh)
+# ---------------------------------------------------------------------------
+env/
+scripts/setup_env.log
+scripts/get-pip.py
+
+# ---------------------------------------------------------------------------
+# Python / notebook noise
+# ---------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.virtual_documents/
+*.egg-info/
+
+# ---------------------------------------------------------------------------
+# OS / editor
+# ---------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# Cluster-specific paths to the raw data (see local_paths.example.py)
+local_paths.py

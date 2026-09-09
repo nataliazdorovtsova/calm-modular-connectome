@@ -1,0 +1,11 @@
+
+
+# ---------------------------------------------------------------------------
+# Subject above: imperative mood, <= 72 chars ("Add figure 1", not "Added...")
+# Blank line, then body: WHY the change, not how. Wrap at 72.
+#
+# The Co-Authored-By line below is pre-filled because most work on this project
+# is done pairing. DELETE IT if Sabrina was not involved in this commit --
+# attribution should be accurate, not automatic.
+# ---------------------------------------------------------------------------
+Co-Authored-By: Sabrina Harverson <sabrina.eharverson@gmail.com>
