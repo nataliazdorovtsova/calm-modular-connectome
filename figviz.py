@@ -88,7 +88,7 @@ def draw_edges(pax, P, pairs, assign, show=None, within_lw=0.85,
 
 
 def draw_nodes(pax, P, assign, sizes, show=None, mode="light", ring=0.7,
-               zorder=4, color_override=None):
+               zorder=4, color_override=None, alpha=None):
     """Community-coloured nodes with a surface-coloured ring, hubs on top."""
     show = np.ones(len(P), dtype=bool) if show is None else show
     idx = np.flatnonzero(show)
@@ -99,7 +99,8 @@ def draw_nodes(pax, P, assign, sizes, show=None, mode="light", ring=0.7,
     colors = ([color_override] * len(idx) if color_override is not None
               else [cs.community_color(int(assign[i])) for i in idx])
     pax.scatter(P[idx, 0], P[idx, 1], s=s[idx], c=colors,
-                edgecolors=cs.SURFACE[mode], linewidths=ring, zorder=zorder)
+                edgecolors=cs.SURFACE[mode], linewidths=ring, zorder=zorder,
+                alpha=alpha)
 
 
 def top_edges(W, pct):

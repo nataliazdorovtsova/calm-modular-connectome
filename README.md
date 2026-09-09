@@ -137,6 +137,45 @@ inside distance bins, the gap not only survives but **widens with distance**:
 2.5× at 0–30 mm, 3.2× at 30–50, 4.0× at 50–70, 7.0× at 70–90 and 10.5× beyond
 90 mm. Modular structure here is therefore not a distance artefact.
 
+### Figure 5 — The connectome collapsed
+
+*What it shows.* Four frames of a single transformation, left to right: the
+region-level connectome in anatomical space, two intermediate states, and the
+community-level network. Every frame is the same data; only the geometry
+changes.
+
+*How it was made.* Each region's position is linearly interpolated from its true
+MNI coordinate toward its own community's centroid,
+
+    position(t) = (1 − t) × anatomical + t × community centroid
+
+so t = 0 reproduces Figure 1 and at t = 1 every region of a community sits at
+one point — at which the connectome *is* the community graph. Three things are
+tied to t so the row reads as one motion rather than four unrelated pictures:
+
+- **the glass-brain outline fades out**, because after t = 0 the positions are
+  no longer anatomical and keeping a brain frame around them would be a lie;
+- **within-community edges fade out**, since a collapsing community absorbs its
+  own internal connections;
+- **between-community edges keep their endpoints**, so as communities converge
+  these edges pile onto the same segments. The super-edges in the final panel
+  therefore assemble themselves out of region-level edges by superposition —
+  the figure shows where community-level connectivity *comes from* rather than
+  asserting it.
+
+Super-node radius is set from the geometry rather than by eye: the two closest
+community centroids in this plane are 24 mm apart, so radii are capped at 40% of
+that separation, with area kept proportional to region count inside the ceiling.
+Without that constraint the final panel becomes a pile of overlapping discs.
+
+The final panel keeps the communities at their anatomical centroids, which is
+what makes the sequence a *collapse* rather than a re-layout. Figure 6 takes the
+same community graph into abstract space.
+
+*Statistics.* None new — this figure re-renders the geometry of data already
+quantified in Figures 1–4. Edge widths in the final panel come from the same
+community × community block means shown in Figure 4A.
+
 ---
 
 ## Notes
