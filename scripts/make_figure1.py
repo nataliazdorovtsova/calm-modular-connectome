@@ -30,14 +30,13 @@ import matplotlib
 matplotlib.use("Agg")
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.collections import LineCollection
 from matplotlib.lines import Line2D
-from nilearn import plotting
 
 PROJ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, PROJ)
 from style import calm_style as cs      # noqa: E402
 import calm_data as cd                  # noqa: E402
+import figviz                           # noqa: E402
 
 OUT = os.path.join(PROJ, "figures")
 MODE = "light"
@@ -48,18 +47,6 @@ VIEWS = [("l", "Left sagittal"), ("r", "Right sagittal"),
          ("y", "Coronal"), ("z", "Axial")]
 
 
-def project(coords, direction):
-    """MNI mm -> the 2-D plane nilearn draws for each view."""
-    x, y, z = coords[:, 0], coords[:, 1], coords[:, 2]
-    if direction in ("l", "r"):
-        return np.c_[y, z]        # sagittal
-    if direction == "y":
-        return np.c_[x, z]        # coronal
-    if direction == "z":
-        return np.c_[x, y]        # axial
-    raise ValueError(direction)
-
-
 def draw_view(ax, direction, W, coords, assign, keep, strength):
     """One glass-brain panel with edges then nodes on top.
 
@@ -68,48 +55,12 @@ def draw_view(ax, direction, W, coords, assign, keep, strength):
     communities and make the left and right panels look nearly identical,
     hiding the hemispheric split that is the dominant structure here.
     """
-    display = plotting.plot_glass_brain(
-        None, display_mode=direction, axes=ax, annotate=False,
-        black_bg=False, alpha=0.10)
-    pax = display.axes[direction].ax
-    P = project(coords, direction)
-
-    # hemisphere mask for the sagittal panels
-    if direction == "l":
-        show = coords[:, 0] < 0
-    elif direction == "r":
-        show = coords[:, 0] >= 0
-    else:
-        show = np.ones(len(coords), dtype=bool)
-
-    # --- edges: between-community first (recessive), then within (on top) ---
-    within, between, wcol = [], [], []
-    for i, j in zip(*keep):
-        if not (show[i] and show[j]):
-            continue
-        seg = [P[i], P[j]]
-        if assign[i] == assign[j]:
-            within.append(seg)
-            wcol.append(cs.community_color(int(assign[i])))
-        else:
-            between.append(seg)
-
-    if between:
-        pax.add_collection(LineCollection(
-            between, colors=cs.CONTEXT_EDGE, linewidths=0.45, alpha=0.85,
-            zorder=2, capstyle="round"))
-    if within:
-        pax.add_collection(LineCollection(
-            within, colors=wcol, linewidths=0.85, alpha=0.55, zorder=3,
-            capstyle="round"))
-
-    # --- nodes: size = strength, colour = community, surface ring on top ---
-    idx = np.flatnonzero(show)
-    idx = idx[np.argsort(strength[idx])]   # weakest first so hubs sit on top
-    pax.scatter(P[idx, 0], P[idx, 1],
-                s=strength[idx], c=[cs.community_color(int(assign[i]))
-                                    for i in idx],
-                edgecolors=cs.SURFACE[MODE], linewidths=0.7, zorder=4)
+    pax = figviz.glass_panel(ax, direction, alpha=0.10)
+    P = figviz.project(coords, direction)
+    show = figviz.hemisphere_mask(coords, direction)
+    figviz.draw_edges(pax, P, keep, assign, show=show,
+                      within_lw=0.85, between_lw=0.45, within_alpha=0.55)
+    figviz.draw_nodes(pax, P, assign, strength, show=show, mode=MODE, ring=0.7)
     return pax
 
 
@@ -122,11 +73,7 @@ def main():
     present = cd.present_communities(assign)
 
     # selective edge display
-    iu = np.triu_indices_from(W, 1)
-    thr = np.percentile(W[iu], EDGE_PCT)
-    keep_mask = W[iu] >= thr
-    keep = (iu[0][keep_mask], iu[1][keep_mask])
-    n_edges = int(keep_mask.sum())
+    keep, _, n_edges, n_total = figviz.top_edges(W, EDGE_PCT)
     n_within = int((assign[keep[0]] == assign[keep[1]]).sum())
 
     # node size from weighted degree
@@ -176,8 +123,8 @@ def main():
     fig.savefig(os.path.join(OUT, "figure1_modular_connectome.pdf"))
     fig.savefig(os.path.join(OUT, "figure1_modular_connectome.png"), dpi=400)
     plt.close(fig)
-    print(f"  edges shown : {n_edges} of {len(iu[0])} "
-          f"({n_edges / len(iu[0]):.1%}), {n_within} within-community")
+    print(f"  edges shown : {n_edges} of {n_total} "
+          f"({n_edges / n_total:.1%}), {n_within} within-community")
     print(f"  modularity Q: {Q:.3f}")
     print("  wrote figures/figure1_modular_connectome.{pdf,png}")
 

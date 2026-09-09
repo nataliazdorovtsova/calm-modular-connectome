@@ -77,19 +77,11 @@ def main():
     between_mean = W[~same & off].mean()
 
     cs.use_style(MODE)
-    fig = plt.figure(figsize=(7.09, 4.7))
+    fig = plt.figure(figsize=(7.09, 4.35))
 
-    fig.text(0.045, 0.955, "Communities in connectivity space", fontsize=13,
+    fig.text(0.045, 0.965, "Communities in connectivity space", fontsize=13,
              weight="semibold", color=INK["primary"], va="top")
-    fig.text(0.045, 0.905,
-             "The same 100 × 100 group-average matrix under two orderings. "
-             "Reordering by community is a permutation only — no\nvalue "
-             "changes — so the blocks on the right are structure in the data, "
-             "not in the rendering.",
-             fontsize=cs.TYPE["annotation"], color=INK["secondary"], va="top",
-             linespacing=1.5)
-
-    gs = fig.add_gridspec(1, 2, left=0.055, right=0.86, top=0.735,
+    gs = fig.add_gridspec(1, 2, left=0.055, right=0.86, top=0.800,
                           bottom=0.115, wspace=0.20)
 
     # ---- left: atlas order -------------------------------------------------
@@ -115,7 +107,7 @@ def main():
     cs.draw_community_blocks(ax1, bounds, n, mode=MODE, lw=0.8)
     ax1.set_title("Community order", fontsize=cs.TYPE["panel_title"],
                   weight="semibold", color=INK["primary"], loc="left", pad=30)
-    ax1.annotate("same matrix, rows and columns permuted",
+    ax1.annotate("same matrix and colour scale, rows and columns permuted",
                  xy=(0, 1), xycoords="axes fraction", xytext=(0, 18),
                  textcoords="offset points", fontsize=cs.TYPE["caption"],
                  color=INK["secondary"], ha="left", va="bottom")
@@ -132,7 +124,7 @@ def main():
                            facecolor=cs.SURFACE[MODE], alpha=0.82))
 
     # ---- colourbar ---------------------------------------------------------
-    cax = fig.add_axes([0.885, 0.115, 0.016, 0.62])
+    cax = fig.add_axes([0.885, 0.115, 0.016, 0.685])
     cb = fig.colorbar(im, cax=cax)
     cb.outline.set_visible(False)
     cb.ax.tick_params(length=2.5, width=0.6, labelsize=cs.TYPE["caption"],
