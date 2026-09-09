@@ -218,6 +218,48 @@ consistent with their block mean of 3 streamlines in Figure 4A against 284 and
 
 ---
 
+## Beyond the six
+
+### Figure 7 — Networks versus communities
+
+*What it shows.* The Schaefer parcellation ships an a priori functional
+partition — the canonical Yeo networks, 16 of which appear in the 100-region
+atlas. The five communities in Figures 1–6 were derived from the structural data
+itself. This figure asks whether they agree. **A**: the 16 × 16 network × network
+connectivity matrix. **B**: modularity Q of four candidate partitions on the same
+connectome. **C**: how the five communities distribute across the 16 networks.
+
+*How it was made.* Network block means follow the same convention as Figure 4A
+(diagonal blocks use the upper triangle only), on a logarithmic colour scale.
+Panel A is deliberately left in canonical Yeo order rather than reordered to
+look blocky: Figure 2 could reorder because the point there was that blocks
+exist, whereas here the point is that they largely do not, and permuting until
+they appeared would manufacture the opposite conclusion.
+
+*Statistics.* Newman modularity Q is computed for each candidate partition on
+the identical weighted graph, so the numbers are directly comparable:
+
+| partition | Q |
+|---|---|
+| Louvain communities (5) | **0.528** |
+| Hemisphere (2) | 0.271 |
+| Schaefer networks (16) | **0.158** |
+| Networks × hemisphere (32) | 0.078 |
+
+Agreement between partitions is measured with adjusted mutual information, which
+corrects for the chance agreement expected from partition sizes alone:
+**AMI = 0.16** between communities and networks, against **AMI = 0.36** between
+communities and hemisphere.
+
+The a priori functional networks therefore describe this structural connectome
+*worse than simply splitting the brain in half*, and the data-driven communities
+align more than twice as strongly with hemisphere as with functional network.
+Structural modules here follow space, not function. This is consistent with what
+Figures 1 and 3 show anatomically, and it is a property of streamline-count
+tractography rather than a claim about functional organisation.
+
+---
+
 ## Notes
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) before making a figure or a commit.
