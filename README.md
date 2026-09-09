@@ -95,6 +95,48 @@ as the observed value. **All five communities are significantly more spatially
 compact than chance** (25–44 mm observed against 55–58 mm expected; p ≤ 0.001),
 so the partition tracks anatomy closely rather than being spatially diffuse.
 
+### Figure 4 — Modular brain architecture
+
+*What it shows.* Three panels building one argument. **A**: the region-level
+connectome collapsed into a 5 × 5 community × community matrix of mean
+streamline count, with the diagonal carrying within-community connectivity.
+**B**: the edge-weight distribution behind each of those block means, because a
+mean over heavily skewed counts hides most of what is going on. **C**: the same
+within-versus-between comparison held at matched edge length.
+
+*How it was made.* Block means are taken over all region pairs in each block;
+for diagonal blocks only the upper triangle is used, so a region is never paired
+with itself. Panel A uses a logarithmic colour scale — block means span 3 to
+1,540 streamlines, and a linear scale would collapse everything but the
+diagonal. Panel B plots log-scaled distributions with medians marked. Panel C
+bins every edge by Euclidean distance between region centroids and compares
+within- against between-community means inside each bin.
+
+*Statistics.* The proposal invites several candidate summary measures, and they
+disagree sharply on these data:
+
+| measure | within | between | ratio |
+|---|---|---|---|
+| mean count | 430 | 43 | 10.1× |
+| median count | 57 | 0.2 | 364× |
+| proportion nonzero | 0.94 | 0.55 | 1.7× |
+| proportion above global 75th pct | 0.59 | 0.15 | 3.9× |
+| mean log(1 + count) | 3.94 | 1.21 | 3.2× |
+
+The median is rejected: the between-community median is essentially zero, so
+its ratio is an artefact of a near-zero denominator rather than a finding. The
+mean is used in panel A because it is interpretable in streamlines, with panel B
+supplying the spread it conceals.
+
+Panel C addresses a confound that Figure 3 creates. Those communities are
+spatially compact, within-community edges are shorter than between-community
+ones (**58 vs 87 mm**), and streamline count falls steeply with distance
+(**r = −0.47**) — so "10× more connectivity within communities" risks being a
+restatement of "within-community edges are shorter". Comparing like with like
+inside distance bins, the gap not only survives but **widens with distance**:
+2.5× at 0–30 mm, 3.2× at 30–50, 4.0× at 50–70, 7.0× at 70–90 and 10.5× beyond
+90 mm. Modular structure here is therefore not a distance artefact.
+
 ---
 
 ## Notes
