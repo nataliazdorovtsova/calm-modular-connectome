@@ -176,6 +176,46 @@ same community graph into abstract space.
 quantified in Figures 1–4. Edge widths in the final panel come from the same
 community × community block means shown in Figure 4A.
 
+### Figure 6 — The network of networks
+
+*What it shows.* A circular connectogram. All 100 regions sit on the ring,
+ordered by community and then by anatomical network, each individually
+labelled. The coloured arcs outside the ring are the communities — the "nodes"
+of the network of networks — and the chords crossing the interior are their
+relationships.
+
+*How it was made.* Only **between-community** connections are drawn: the
+previous five figures were about within-community density, and including it here
+would fill the disc with structure already established. What remains is the
+higher-level organisation, and specifically *which regions* carry traffic
+between which communities. The 70 strongest between-community edges are shown,
+as cubic Bézier chords bowed toward the centre, with curvature scaled by
+angular separation so long chords do not crowd the ring.
+
+As in Figure 5, the aggregate assembles itself: chords are drawn per region
+pair, not per community pair, so a thick visual bundle between two arcs *is* the
+community-level relationship, and a sparse bundle is a real absence rather than
+a thresholding artefact.
+
+Schaefer 17-network names are too long to ring a circle, so they are abbreviated
+(`LH_VisCent_ExStr_1` → `L Vis-C ExStr 1`) while keeping hemisphere, network,
+sub-region and index. Region labels wear ink colours rather than community
+colours, per the style guide — the coloured tick beside each label carries
+identity.
+
+Chords are grey, not community-coloured, deliberately: a chord has two community
+endpoints, so painting it one community's colour would claim an identity it does
+not have. The palette stays on the arcs, where identity is unambiguous, and the
+chord spends its width on magnitude instead.
+
+*Statistics.* None new. The chord counts do quantify the higher-level structure:
+of the 70 strongest between-community connections, community pairs 1–4 (14
+chords), 2–4 (12), 3–4 (10) and 3–5 (10) dominate, while **communities 1 and 2 —
+the wholly left and wholly right communities — take only 1 chord between them**.
+That is the corpus callosum bottleneck appearing as a near-absence, and it is
+consistent with their block mean of 3 streamlines in Figure 4A against 284 and
+479 within.
+
 ---
 
 ## Notes
