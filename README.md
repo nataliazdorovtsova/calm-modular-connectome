@@ -258,6 +258,39 @@ Structural modules here follow space, not function. This is consistent with what
 Figures 1 and 3 show anatomically, and it is a property of streamline-count
 tractography rather than a claim about functional organisation.
 
+### Figure 8 — The functional networks
+
+*What it shows.* Where the 16 Schaefer networks sit on the cortex, and how they
+interconnect. **A**: one small brain per network, in canonical Yeo order so
+families read together, with that network's regions in colour against the rest
+of the cortex in grey. **B**: the networks as a graph, chord width by mean
+between-network connectivity and node size by region count.
+
+*How it was made.* Two layout decisions were forced by the data rather than
+chosen.
+
+**The networks are faceted, not colour-coded.** Sixteen categories cannot be
+given sixteen colourblind-safe colours — the palette caps categorical identity
+at six, and no ordering beyond that clears the all-pairs gate (see
+[STYLE_GUIDE.md](STYLE_GUIDE.md)). One network per panel means no two network
+colours are ever compared, so the panel label carries identity and every panel
+shares a single neutral accent. That accent is deliberately not one of the six
+community slots, since reusing a community colour here would imply an identity
+that is not being claimed.
+
+**Panel B is circular rather than anatomical.** The first version placed each
+network at its own centroid on a glass brain. Because most networks are
+bilateral, their centroids average to near the midline, and the axial view
+stacked them into an unreadable column with labels too large for their nodes.
+Panel A already carries the anatomy, so freeing panel B from it lets position
+serve legibility instead.
+
+*Statistics.* None new; block means follow the same convention as Figures 4A and
+7A. The strongest between-network pairs are Cont-A–Cont-B (547 streamlines),
+dAttn-A–Cont-B (396) and Limbic–Def-C (376) — note these are pairs of
+*neighbouring* networks, consistent with the distance dependence quantified in
+Figure 4C.
+
 ---
 
 ## Notes
